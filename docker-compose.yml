@@ -1,0 +1,17 @@
+services:
+  mcp-ddgs:
+    container_name: mcp-ddgs
+    restart: unless-stopped
+    pull_policy: build
+    image: lowlyocean/mcp-ddgs:latest
+    build:
+      context: .
+      network: host
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      FASTMCP_PORT: ${PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    network_mode: ${NETWORK_MODE}
+  
